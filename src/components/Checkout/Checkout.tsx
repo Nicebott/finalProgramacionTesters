@@ -1,4 +1,4 @@
-import { CreditCard, MapPin, User, Mail, Phone } from 'lucide-react';
+import { CreditCard, MapPin, User, Mail, Phone, Wallet } from 'lucide-react';
 import { useState } from 'react';
 import { useCartContext } from '../../contexts/CartContext';
 import { useAuth } from '../../contexts/AuthContext';
@@ -10,6 +10,7 @@ interface CheckoutProps {
 export function Checkout({ onBack }: CheckoutProps) {
   const { user } = useAuth();
   const { cart, cartTotal } = useCartContext();
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal'>('card');
   const [formData, setFormData] = useState({
     fullName: '',
     email: user?.email || '',
@@ -195,6 +196,35 @@ export function Checkout({ onBack }: CheckoutProps) {
               <h2 className="text-2xl font-bold text-gray-800 mb-6">
                 Información de Pago
               </h2>
+
+              <div className="flex gap-4 mb-6">
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('card')}
+                  className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all flex items-center justify-center space-x-2 ${
+                    paymentMethod === 'card'
+                      ? 'bg-teal-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <CreditCard className="w-5 h-5" />
+                  <span>Tarjeta</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('paypal')}
+                  className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all flex items-center justify-center space-x-2 ${
+                    paymentMethod === 'paypal'
+                      ? 'bg-teal-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <Wallet className="w-5 h-5" />
+                  <span>PayPal</span>
+                </button>
+              </div>
+
+              {paymentMethod === 'card' ? (
               <form className="space-y-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -264,6 +294,44 @@ export function Checkout({ onBack }: CheckoutProps) {
                   </div>
                 </div>
               </form>
+              ) : (
+                <div className="space-y-4">
+                  <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 text-center">
+                    <div className="flex justify-center mb-4">
+                      <Wallet className="w-16 h-16 text-blue-600" />
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-800 mb-2">
+                      Pagar con PayPal
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      Serás redirigido a PayPal para completar tu pago de forma segura.
+                    </p>
+                    <div className="bg-white rounded-lg p-4 border border-blue-200">
+                      <p className="text-sm text-gray-600 mb-2">Monto a pagar:</p>
+                      <p className="text-2xl font-bold text-blue-600">
+                        RD${(cartTotal + 150 + cartTotal * 0.18).toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-800 mb-2">Ventajas de PayPal:</h4>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-start">
+                        <span className="text-green-600 mr-2">✓</span>
+                        <span>Protección del comprador</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-green-600 mr-2">✓</span>
+                        <span>No compartes tus datos bancarios</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-green-600 mr-2">✓</span>
+                        <span>Proceso rápido y seguro</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

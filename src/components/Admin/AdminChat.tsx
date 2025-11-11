@@ -260,7 +260,7 @@ export function AdminChat() {
                       }`}
                     >
                       <div className="flex items-start justify-between mb-2">
-                        <div className="flex-1">
+                        <div className="flex-1 min-w-0 pr-2">
                           <p className="font-semibold text-gray-800 truncate">
                             {conversation.user_email}
                           </p>
@@ -278,7 +278,7 @@ export function AdminChat() {
                             )}
                           </div>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 flex-shrink-0">
                           {conversation.status === 'open' && (
                             <button
                               onClick={(e) => {
@@ -339,9 +339,9 @@ export function AdminChat() {
             {selectedConversation ? (
               <>
                 <div className="bg-gray-50 border-b border-gray-200 p-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="font-bold text-lg text-gray-900">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <div className="min-w-0">
+                      <h3 className="font-bold text-lg text-gray-900 truncate">
                         {selectedConvData?.user_email}
                       </h3>
                       <p className="text-sm text-gray-600">
@@ -357,7 +357,7 @@ export function AdminChat() {
                         </span>
                       </p>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-shrink-0">
                       {selectedConvData?.status === 'open' && (
                         <button
                           onClick={() => handleCloseConversation(selectedConversation)}

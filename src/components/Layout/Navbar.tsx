@@ -123,10 +123,10 @@ export const Navbar = memo(function Navbar({ onNavigate, currentPage, onOpenAuth
                 </button>
 
                 {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 animate-fadeIn z-20">
+                  <div className="absolute right-0 mt-2 w-64 max-w-xs bg-white rounded-lg shadow-lg border border-gray-200 animate-fadeIn z-20">
                     <div className="py-2">
                       <div className="px-4 py-3 border-b border-gray-200">
-                        <p className="text-sm font-medium text-gray-900">{user.email}</p>
+                        <p className="text-sm font-medium text-gray-900 break-words">{user.email}</p>
                       </div>
                       {isAdmin && (
                         <>

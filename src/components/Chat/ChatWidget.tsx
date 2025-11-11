@@ -226,7 +226,7 @@ export function ChatWidget() {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 flex flex-col animate-scaleIn">
+        <div className="fixed bottom-4 sm:bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-96 h-[calc(100vh-5rem)] sm:h-[500px] max-h-[600px] bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 flex flex-col animate-scaleIn">
           <div className="bg-teal-600 text-white p-4 rounded-t-2xl">
             <h3 className="font-bold text-lg">Chat de Soporte</h3>
             <p className="text-sm text-teal-100">Estamos aquí para ayudarte</p>
