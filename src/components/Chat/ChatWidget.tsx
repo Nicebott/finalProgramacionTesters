@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { MessageCircle, X, Send, Loader2, CheckCircle } from 'lucide-react';
+import { MessageCircle, X, Send, Loader2, CheckCircle, Minimize2 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { chatService, Message } from '../../services/chatService';
 import { RealtimeChannel } from '@supabase/supabase-js';
@@ -227,9 +227,18 @@ export function ChatWidget() {
 
       {isOpen && (
         <div className="fixed bottom-4 sm:bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-96 h-[calc(100vh-5rem)] sm:h-[500px] max-h-[600px] bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 flex flex-col animate-scaleIn">
-          <div className="bg-teal-600 text-white p-4 rounded-t-2xl">
-            <h3 className="font-bold text-lg">Chat de Soporte</h3>
-            <p className="text-sm text-teal-100">Estamos aquí para ayudarte</p>
+          <div className="bg-teal-600 text-white p-4 rounded-t-2xl flex items-center justify-between">
+            <div>
+              <h3 className="font-bold text-lg">Chat de Soporte</h3>
+              <p className="text-sm text-teal-100">Estamos aquí para ayudarte</p>
+            </div>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="md:hidden p-2 hover:bg-teal-700 rounded-lg transition-colors"
+              aria-label="Minimizar chat"
+            >
+              <Minimize2 className="w-5 h-5" />
+            </button>
           </div>
 
           <div

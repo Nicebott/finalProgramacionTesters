@@ -167,17 +167,39 @@ export const Navbar = memo(function Navbar({ onNavigate, currentPage, onOpenAuth
             )}
           </div>
 
-          <button
-            className="md:hidden p-2 text-gray-700"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
+          <div className="flex md:hidden items-center space-x-3">
+            <div ref={cartButtonRef} className="relative">
+              <button
+                onClick={() => setCartDropdownOpen(!cartDropdownOpen)}
+                className="relative p-2 text-gray-700 hover:text-teal-600 transition-all duration-200"
+                aria-label="Carrito de compras"
+              >
+                <ShoppingCart className="w-6 h-6" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-teal-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-scaleIn">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+              <CartDropdown
+                isOpen={cartDropdownOpen}
+                onClose={() => setCartDropdownOpen(false)}
+                onCheckout={onOpenCheckout}
+              />
+            </div>
+
+            <button
+              className="p-2 text-gray-700"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
